@@ -1,5 +1,5 @@
 "use client";
-import { PlusCircle, User } from "lucide-react";
+import { User } from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 
