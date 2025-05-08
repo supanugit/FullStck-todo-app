@@ -43,7 +43,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const { email, task, finished } = await req.json();
-
+  await connectDB();
   if (email == null || task == null || finished == null) {
     return NextResponse.json(
       { error: "Missing required fields" },
@@ -69,6 +69,7 @@ export async function POST(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   const { email, id } = await req.json();
+  await connectDB();
   if (email == null || id == null) {
     return NextResponse.json({
       message: "Missing required fields",
@@ -97,6 +98,7 @@ export async function DELETE(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   const { email, id, task, finished } = await req.json();
+  // await connectDB();
   if (email == null || id == null || task == null || finished == null) {
     return NextResponse.json({
       message: "Missing required fields",
