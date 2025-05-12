@@ -1,7 +1,7 @@
 "use client";
 import axios from "axios";
-import { PlusCircle } from "lucide-react";
-import { useSession } from "next-auth/react";
+import { PlusCircle, CircleX } from "lucide-react";
+import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -30,9 +30,14 @@ export default function Home() {
     fetchTasks();
   }, [status, user]);
 
-  const handleClick = () => setVisible(!visible);
+  const handleClick = () => {
+    user ? setVisible(!visible) : signIn();
+  };
 
   const handleAdd = async () => {
+    if (!task) {
+      return;
+    }
     try {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_FETCH_URL}/api`, {
         email: user?.user?.email,
@@ -113,9 +118,13 @@ export default function Home() {
     <div className="w-full h-screen flex flex-col items-center justify-start pt-20 bg-gray-100">
       <button
         onClick={handleClick}
-        className="absolute top-5 right-30 flex items-center gap-2 bg-white text-indigo-600 px-4 py-2 rounded-full font-medium hover:bg-indigo-100 transition">
-        <PlusCircle className="w-5 h-5" />
-        Add Task
+        className="absolute top-5 right-15 md:right-30 flex items-center gap-2 bg-white text-indigo-600 px-2 py-1 rounded-full font-medium hover:bg-indigo-100 transition">
+        {visible ? (
+          <CircleX className="w-3.5 h-3.5 md:w-5 md:h-5" />
+        ) : (
+          <PlusCircle className="w-3.5 h-3.5 md:w-5 md:h-5" />
+        )}
+        {visible ? "Close Task Bar" : "Add Task"}
       </button>
 
       {visible && (
