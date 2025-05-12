@@ -118,7 +118,7 @@ export default function Home() {
     <div className="w-full h-screen flex flex-col items-center justify-start pt-20 bg-gray-100">
       <button
         onClick={handleClick}
-        className="absolute top-5 right-15 md:right-30 flex items-center gap-2 bg-white text-indigo-600 px-2 py-1 rounded-full font-medium hover:bg-indigo-100 transition">
+        className="absolute top-5 right-15 md:right-30 flex items-center gap-2 bg-white text-indigo-600 px-2 py-1 md:px-4 md:py-2 rounded-full font-medium hover:bg-indigo-100 transition">
         {visible ? (
           <CircleX className="w-3.5 h-3.5 md:w-5 md:h-5" />
         ) : (
